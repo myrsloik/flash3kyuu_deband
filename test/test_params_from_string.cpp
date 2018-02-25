@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #include <type_traits>
 
 #include "gtest_stub.h"

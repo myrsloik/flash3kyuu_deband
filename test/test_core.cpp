@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #include <memory>
 #include "gtest_stub.h"
 #include <f3kdb.h>
@@ -15,18 +13,18 @@ static const int GUARD_CONST = 0xDEADBEEF;
 static unsigned char * create_guarded_buffer(int const height, int const pitch, unsigned char **data_start)
 {
     assert(pitch % PLANE_ALIGNMENT == 0);
-	unsigned char* buffer = (unsigned char*)_aligned_malloc( (height + 4) * pitch, PLANE_ALIGNMENT);
+    unsigned char* buffer = (unsigned char*)_aligned_malloc( (height + 4) * pitch, PLANE_ALIGNMENT);
 
-	for (int i = 0; i < pitch * 2; i += 4)
-	{
-		*(int*)(buffer + i) = GUARD_CONST;
-	}
-	for (int i = 0; i < pitch * 2; i += 4)
-	{
-		*(int*)(buffer + (height + 2) * pitch + i) = GUARD_CONST;
-	}
-	*data_start = buffer + pitch * 2;
-	return buffer;
+    for (int i = 0; i < pitch * 2; i += 4)
+    {
+        *(int*)(buffer + i) = GUARD_CONST;
+    }
+    for (int i = 0; i < pitch * 2; i += 4)
+    {
+        *(int*)(buffer + (height + 2) * pitch + i) = GUARD_CONST;
+    }
+    *data_start = buffer + pitch * 2;
+    return buffer;
 }
 
 static void check_guard_bytes(unsigned char *buffer, int const height, int const pitch)

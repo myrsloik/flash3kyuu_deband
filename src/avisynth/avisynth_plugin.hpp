@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #define CONCAT2(a, b) a##b
 #define CONCAT(a, b) CONCAT2(a, b)
 
@@ -25,14 +23,14 @@ const AVS_Linkage *AVS_linkage;
 F3KDB_API(const char*) AvisynthPluginInit3(IScriptEnvironment* env, const AVS_Linkage* const vectors) {
     AVS_linkage = vectors;
 #endif
-	env->AddFunction("flash3kyuu_deband", 
-		F3KDB_AVS_PARAMS, 
-		Create_flash3kyuu_deband, 
-		NULL);
-	env->AddFunction("f3kdb", 
-		F3KDB_AVS_PARAMS, 
-		Create_flash3kyuu_deband, 
-		NULL);
+    env->AddFunction("flash3kyuu_deband", 
+        F3KDB_AVS_PARAMS, 
+        Create_flash3kyuu_deband, 
+        NULL);
+    env->AddFunction("f3kdb", 
+        F3KDB_AVS_PARAMS, 
+        Create_flash3kyuu_deband, 
+        NULL);
 
-	return "f3kdb";
+    return "f3kdb";
 }
