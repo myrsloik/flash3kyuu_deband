@@ -52,7 +52,7 @@ static void VS_CC f3kdbFree(void *instanceData, VSCore *core, const VSAPI *vsapi
     f3kdb_vs_context_t *d = (f3kdb_vs_context_t *)instanceData;
     f3kdb_destroy(d->core);
     vsapi->freeNode(d->node);
-    free(d);
+    delete d;
 }
 
 static void VS_CC f3kdbCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, const VSAPI *vsapi) {
@@ -147,14 +147,7 @@ static void VS_CC f3kdbCreate(const VSMap *in, VSMap *out, void *userData, VSCor
         return;
     }
 
-    f3kdb_vs_context_t* context = (f3kdb_vs_context_t*)malloc(sizeof(f3kdb_vs_context_t));
-    if (!context)
-    {
-        // Shouldn't really happen, just in case
-        f3kdb_destroy(f3kdb_core);
-        vsapi->freeNode(node);
-        return;
-    }
+    f3kdb_vs_context_t* context = new f3kdb_vs_context_t();
 
     context->core = f3kdb_core;
     context->node = node;
